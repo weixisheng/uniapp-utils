@@ -3,64 +3,14 @@
  * @Date: 2020-11-30 18:35:51
  * @Description 工具集
  */
-import throttle from './throttle'
-import debounce from './debounce'
+import throttle from './modules/throttle'
+import debounce from './modules/debounce'
+import route from './modules/route'
+import loading from './modules/loading'
+import ui from './modules/ui'
+const { name, version } = require('../package.json')
+console.log(`%c ${name}: v${version} `, `background-color: #8e0;color:#fff;`)
 
-const route = (type) => (url) =>
-  typeof url === 'string' ? uni[type]({ url }) : uni[type](url)
-export const navigate = (url) => {
-  route('navigateTo')(url)
-}
-export const switchTab = (url) => {
-  route('switchTab')(url)
-}
-export const redirect = (url) => {
-  route('redirectTo')(url)
-}
-export const reLaunch = (url) => {
-  route('reLaunch')(url)
-}
-
-export const goBack = (delta = 1) => {
-  uni.navigateBack({
-    delta
-  })
-}
-
-export const msg = (
-  title,
-  { icon = 'none', duration = 2000, mask = true } = {}
-) => {
-  // 使用：this.$msg('提示信息')
-  title &&
-    uni.showToast({
-      title,
-      duration,
-      mask,
-      icon
-    })
-}
-
-export const loading = {
-  show(title = '数据加载中') {
-    uni.showLoading({
-      title,
-      mask: true
-    })
-  },
-  hide() {
-    uni.hideLoading()
-  }
-}
-
-export const barLoading = {
-  show() {
-    uni.showNavigationBarLoading()
-  },
-  hide() {
-    uni.hideNavigationBarLoading()
-  }
-}
 /**
  * 返回页面实例
  * @param {Number} delta 页面相对层级
@@ -106,7 +56,7 @@ export const storage = {
   set(key, value) {
     uni.setStorageSync(key, value)
   },
-  clear(key) {
+  remove(key) {
     // 单个key直接清除，key数组逐个清除
     if (typeof key === 'string') {
       uni.removeStorageSync(key)
@@ -116,18 +66,16 @@ export const storage = {
           uni.removeStorageSync(item)
         })
     }
+  },
+  clear() {
+    uni.clearStorageSync()
   }
 }
 
 const h = {
-  navigate,
-  switch: switchTab,
-  redirect,
-  reLaunch,
-  goBack,
-  msg,
-  loading,
-  barLoading,
+  ...route,
+  ...loading,
+  ...ui,
   getPage,
   ck,
   storage,

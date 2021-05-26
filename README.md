@@ -10,39 +10,21 @@ npm install @hishion_wei/uniapp-utils -S
 
 具体使用方法参考下方说明
 
-- 全局使用
-  导入并注册，util 会以\$h 作为标识符
+导入并注册，`utils` 会以 `\$h` 作为标识符
 
 ```js
 // main.js
 import Vue from 'vue'
 
-import utils from '@hishion/uniapp-utils'
+import utils from '@hishion_wei/uniapp-utils'
 Vue.use(utils)
-```
-
-- 模块使用
-  在一些 js 文件无法使用 `this`的情况下，可以导入单独的 `api`
-
-```js
-import {
-  navigate,
-  switchTab,
-  redirect,
-  reLaunch,
-  goBack,
-  msg,
-  loading,
-  barLoading,
-  getPage,
-  ck,
-  storage
-} from '@hishion_wei/uniapp-utils'
 ```
 
 ## route
 
-- 页面跳转 api。传参可以是 string 的路径，或者路径对象，如{url: 'xxx'}
+- 页面跳转
+
+传参可以是 string 的路径，或者路径对象，如{url: 'xxx'}
 
 ```js
 // $h.navigate() 对应uni.navigateTo()
@@ -54,15 +36,19 @@ this.$h.navigate({
 // 还有$h.switch, $h.redirect, $h.reLaunch
 ```
 
-- 页面返回。传参是返回层级，默认是 1
+- 页面返回
+
+传参是返回层级，默认是 1
 
 ```js
 this.$h.goBack()
 ```
 
-## msg
+## UI
 
-封装 uni.showToast()
+- msg
+
+封装 `uni.showToast()`
 
 ```js
 // 基本方法
@@ -72,9 +58,17 @@ this.$h.msg('hello')
 this.$h.msg('hello', {icon?, duration?, mask?})
 ```
 
+- copy
+
+封装 `uni.setClipboardData()`，格式： `this.$h.copy(data, tip = '复制成功')`
+
+- makePhoneCall
+
+封装 `uni.makePhoneCall()`，格式：`this.$h.makePhoneCall(number)`
+
 ## loading
 
-封装 loading 提示框
+- loading 提示框
 
 ```js
 // 开启loading，默认文案是 '数据加载中'，可传参覆盖
@@ -83,7 +77,7 @@ this.$h.loading.show(title?)
 this.$h.loading.hide()
 ```
 
-封装导航条加载动画
+- 导航条加载动画
 
 ```js
 // 开启loading
@@ -141,7 +135,7 @@ this.$h.ck(res, true, {
 
 ## storage
 
-缓存管理对象，设置、获取和清除缓存 api
+缓存管理对象，设置、获取和清除缓存
 
 ```js
 // 设置缓存
@@ -149,9 +143,11 @@ this.$h.storage.set('key', 'value')
 this.$h.storage.set('key1', 'value1')
 // 获取缓存
 this.$h.storage.get('key')
-// 清除缓存，可以传单个key或者key数组
-this.$h.storage.clear('key')
-this.$h.storage.clear(['key', 'key1'])
+// 移除缓存，可以传单个key或者key数组
+this.$h.storage.remove('key')
+this.$h.storage.remove(['key', 'key1'])
+// 清除缓存
+this.$h.storage.clear()
 ```
 
 ## 节流
@@ -168,17 +164,17 @@ this.$h.storage.clear(['key', 'key1'])
 <template>
   <view>
     <!-- 此处用法为在模板中使用，直接$h.throttle()即可 -->
-    <view class="throttle" @tap="$h.throttle(btnAClick, 500)">
+    <view class="throttle" @tap="$h.throttle(btnClick1, 500)">
       节流-模板
     </view>
-    <view class="throttle" @tap="btnBClick">
+    <view class="throttle" @tap="btnClick2">
       节流-js
     </view>
 
-    <view class="debounce" @tap="$h.debounce(btnAClick, 500)">
+    <view class="debounce" @tap="$h.debounce(btnClick1, 500)">
       防抖-模板
     </view>
-    <view class="debounce" @tap="btnCClick">
+    <view class="debounce" @tap="btnClick4">
       防抖-js
     </view>
   </view>
@@ -187,19 +183,19 @@ this.$h.storage.clear(['key', 'key1'])
 <script>
 export default {
   methods: {
-    btnAClick() {
+    btnClick1() {
       console.log('btnClick')
     },
-    btnBClick() {
+    btnClick2() {
       // 此处用法为在js中调用，需要写this.$h.throttle()
-      this.$h.throttle(this.toNext, 500)
+      this.$h.throttle(this.btnClick3, 500)
     },
-    toNext() {
+    btnClick3() {
       console.log('callback')
     },
-    btnCClick() {
+    btnClick4() {
       // 此处用法为在js中调用，需要写this.$h.debounce()
-      this.$h.debounce(this.toNext, 500)
+      this.$h.debounce(this.btnClick3, 500)
     }
   }
 }
