@@ -3,8 +3,8 @@
  * @Date: 2020-11-30 18:35:51
  * @Description 工具集
  */
-import throttle from './throttle.js'
-import debounce from './debounce.js'
+import throttle from './throttle'
+import debounce from './debounce'
 
 const route = (type) => (url) =>
   typeof url === 'string' ? uni[type]({ url }) : uni[type](url)

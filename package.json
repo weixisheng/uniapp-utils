@@ -1,11 +1,11 @@
 {
   "name": "@hishion_wei/uniapp-utils",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "uni-app基础工具函数",
   "main": "lib/index.min.js",
   "scripts": {
     "build": "gulp",
-    "publish": "npm publish --access public"
+    "deploy": "npm publish --access public"
   },
   "author": "hishion",
   "license": "ISC",
