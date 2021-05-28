@@ -4,6 +4,8 @@
 
 ```bash
 npm install @hishion_wei/uniapp-utils -S
+# or
+yarn add @hishion_wei/uniapp-utils
 ```
 
 ## 使用
@@ -24,7 +26,7 @@ Vue.use(utils)
 
 - 页面跳转
 
-传参可以是 string 的路径，或者路径对象，如{url: 'xxx'}
+传参可以是 string 的路径，或者路径对象，如 `{url: 'xxx'}`
 
 ```js
 // $h.navigate() 对应uni.navigateTo()
@@ -42,6 +44,8 @@ this.$h.navigate({
 
 ```js
 this.$h.goBack()
+// 返回前两页
+this.$h.goBack(2)
 ```
 
 ## UI

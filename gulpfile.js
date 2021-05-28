@@ -23,5 +23,5 @@ gulp.task('build', function () {
 })
 
 gulp.task('default', function () {
-  gulp.watch(['src/*.js'], gulp.series('build'))
+  gulp.watch(['src/**/*.js', 'package.json'], gulp.series('build'))
 })
