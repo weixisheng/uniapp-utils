@@ -42,7 +42,7 @@ export const ck = (
   } else {
     if (!showMsg) return false
     if (!excludeCode.includes(res[codeKey])) {
-      msg(res.return_msg)
+      msg(res[msgKey])
     }
     return false
   }
