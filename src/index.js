@@ -8,6 +8,7 @@ import debounce from './modules/debounce'
 import route from './modules/route'
 import loading from './modules/loading'
 import ui from './modules/ui'
+import checkUpdate from './modules/update'
 const { name, version } = require('../package.json')
 console.log(`%c ${name}: v${version} `, `background-color: #8e0;color:#fff;`)
 
@@ -39,9 +40,6 @@ export const ck = (
   if (res[codeKey] === successCode) {
     return true
   } else {
-    // if (!excludeCode.includes(res[codeKey])) {
-    //   showMsg && msg(res.return_msg)
-    // }
     if (!showMsg) return false
     if (!excludeCode.includes(res[codeKey])) {
       msg(res.return_msg)
@@ -80,7 +78,8 @@ const h = {
   ck,
   storage,
   throttle,
-  debounce
+  debounce,
+  checkUpdate
 }
 const install = (Vue) => {
   Vue.prototype.$h = h

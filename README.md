@@ -114,7 +114,7 @@ this.$h.getPage(1)
 | showMsg | boolean, 默认 true | 自动提示错误信息                         |
 | config  | object             | 用于配置回调数据的 key，兼容不同接口字段 |
 
-因为`config`的不同，可以基于该接口项目进行二次封装，避免重复性代码
+因为`config`的不同，可以基于该接口项目进行二次封装，或者复制源码写在业务逻辑里，避免重复性代码
 
 | 属性        | 类型                     | 说明                                                                                        |
 | ----------- | ------------------------ | ------------------------------------------------------------------------------------------- |
@@ -136,6 +136,7 @@ this.$h.ck(res, true, {
   excludeCode: [80003]
 })
 ```
+源码参考 [uniapp-utils](https://github.com/weixisheng/uniapp-utils/blob/master/src/index.js)
 
 ## storage
 
@@ -204,4 +205,11 @@ export default {
   }
 }
 </script>
+```
+
+## 检查更新
+
+内置小程序检测更新，建议在 `onLaunch` 里面调用
+```js
+this.$h.checkUpdate()
 ```
